@@ -10,10 +10,14 @@ func ping(c *gin.Context) {
 	})
 }
 
-func isActivityRunning(c *gin.Context) {
+func listRankData(c *gin.Context) {
 
 }
 
-func getActivity(c *gin.Context) {
+func addRankData(c *gin.Context) {
+
+}
+
+func getRankRewardConfig(c *gin.Context) {
 
 }

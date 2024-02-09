@@ -12,3 +12,7 @@ type LeeActivityConfig struct {
 	Operator   string    `gorm:"column:operator" json:"operator"`                                 // 操作人
 	App        string    `gorm:"column:app_name" json:"app"`                                      // app
 }
+
+func (d *LeeActivityConfig) TableName() string {
+	return "lee_activity_config"
+}
