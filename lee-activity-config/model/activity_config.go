@@ -10,7 +10,6 @@ type LeeActivityConfig struct {
 	CreateTime time.Time `gorm:"column:create_time;default:CURRENT_TIMESTAMP" json:"create_time"` // 创建时间
 	UpdateTime time.Time `gorm:"column:update_time;default:CURRENT_TIMESTAMP" json:"update_time"` // 更新时间
 	Operator   string    `gorm:"column:operator" json:"operator"`                                 // 操作人
-	App        string    `gorm:"column:app_name" json:"app"`                                      // app
 }
 
 func (d *LeeActivityConfig) TableName() string {
