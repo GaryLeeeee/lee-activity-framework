@@ -19,6 +19,10 @@ type Resp struct {
 }
 
 // func
+func (r Resp) IsSuccess() bool {
+	return r.Code == code.Success.Code
+}
+
 func BuildSuccessResp(data interface{}) Resp {
 	return Resp{
 		Code:    code.Success.Code,

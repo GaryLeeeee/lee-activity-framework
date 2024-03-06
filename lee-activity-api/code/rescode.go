@@ -21,6 +21,7 @@ var (
 	ActivityNotExists = ResErr{Code: 20001, Message: "活动不存在"}
 
 	// lottery
+	LotteryNotExists = ResErr{Code: 30001, Message: "抽奖不存在"}
 
 	// prop
 
@@ -35,6 +36,7 @@ func init() {
 	register(InvalidParam)
 	register(SysError)
 	register(ActivityNotExists)
+	register(LotteryNotExists)
 }
 
 func register(e ResErr) {
