@@ -14,3 +14,10 @@ type LeeActivityLotteryConfig struct {
 func (d *LeeActivityLotteryConfig) TableName() string {
 	return "lee_activity_lottery_config"
 }
+
+type LotteryRewardConfig struct {
+	RewardType   int     `json:"reward_type"`   // 奖励类型
+	RewardId     int     `json:"reward_id"`     // 奖励id
+	RewardAmount int     `json:"reward_amount"` // 奖励数量
+	Probability  float64 `json:"probability"`   // 奖励概率
+}

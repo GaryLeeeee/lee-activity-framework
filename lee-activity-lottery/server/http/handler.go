@@ -25,7 +25,13 @@ func getLotteryTicketAmount(c *gin.Context) {
 }
 
 func useLotteryTicket(c *gin.Context) {
+	var req lottery.UseLotteryTicketReq
+	err := c.ShouldBind(&req)
+	if err != nil {
+		c.JSON(http.StatusOK, base.BuildResp(nil, err))
+	}
 
+	c.JSON(http.StatusOK, base.BuildResp(service.UseLotteryTicket(req)))
 }
 
 func grantLotteryTicket(c *gin.Context) {

@@ -3,8 +3,8 @@ package base
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"lee-activity-framework/lee-activity-api/logger"
 	"net/http"
 )
 
@@ -14,11 +14,16 @@ func HttpPost(url string, body interface{}, result interface{}) error {
 		return err
 	}
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(reqBody))
-	fmt.Printf("http post | url:%+v,body:%+v,resp:%+v", url, reqBody, resp)
 	if err != nil {
 		return err
 	}
 
 	respBody, _ := ioutil.ReadAll(resp.Body)
-	return json.Unmarshal(respBody, &result)
+	err = json.Unmarshal(respBody, &result)
+	if err != nil {
+		return err
+	}
+	logger.Infof("http post | url: %s,req: %s,resp: %s", url, string(reqBody), string(respBody))
+
+	return nil
 }

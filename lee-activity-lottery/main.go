@@ -8,6 +8,8 @@ import (
 func main() {
 	// MySQL
 	dao.InitMySQL()
+	// Redis
+	dao.InitRedis()
 	// Http
 	http.InitRouter()
 }

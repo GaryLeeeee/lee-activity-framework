@@ -2,9 +2,9 @@ package activity
 
 import (
 	"encoding/json"
-	"fmt"
 	"lee-activity-framework/lee-activity-api/base"
 	"lee-activity-framework/lee-activity-api/code"
+	"lee-activity-framework/lee-activity-api/logger"
 )
 
 func IsActivityRunning(activityId int) (bool, error) {
@@ -19,7 +19,7 @@ func IsActivityRunning(activityId int) (bool, error) {
 	resp := new(base.Resp)
 	err := base.HttpPost(uri, req, &resp)
 	if err != nil {
-		fmt.Printf("IsActivityRunning error:%v", err)
+		logger.Errorf("IsActivityRunning error:%v", err)
 		return false, err
 	}
 	if !resp.IsSuccess() {
