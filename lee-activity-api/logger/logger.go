@@ -12,7 +12,10 @@ func init() {
 	// 设置日志级别
 	logger.SetLevel(logrus.DebugLevel)
 	// 输出到控制台
-	logger.Out = os.Stdout
+	logger.SetOutput(os.Stdout)
+	logger.SetFormatter(&LeeFormatter{})
+	// 输出调用文件名、行号、函数名
+	logger.SetReportCaller(true)
 
 	_logger = logger
 }
@@ -23,6 +26,14 @@ func Info(args ...interface{}) {
 
 func Infof(format string, args ...interface{}) {
 	_logger.Infof(format, args...)
+}
+
+func Warn(args ...interface{}) {
+	_logger.Warn(args...)
+}
+
+func Warnf(format string, args ...interface{}) {
+	_logger.Warnf(format, args...)
 }
 
 func Error(args ...interface{}) {
