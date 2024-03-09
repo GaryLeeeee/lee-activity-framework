@@ -31,6 +31,7 @@ var (
 	// rank
 
 	// task
+	GetTaskErr = ResErr{Code: 60001, Message: "获取任务异常"}
 )
 
 var resErrMap = map[int]ResErr{}
@@ -43,6 +44,7 @@ func init() {
 	register(LotteryNotExists)
 	register(LotteryTicketNotEnough)
 	register(UseLotteryTicketErr)
+	register(GetTaskErr)
 }
 
 func register(e ResErr) {
