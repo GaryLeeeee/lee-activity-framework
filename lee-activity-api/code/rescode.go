@@ -29,6 +29,8 @@ var (
 	// prop
 
 	// rank
+	ListRankErr   = ResErr{Code: 50001, Message: "获取榜单异常"}
+	RankNotExists = ResErr{Code: 50002, Message: "榜单不存在"}
 
 	// task
 	GetTaskErr = ResErr{Code: 60001, Message: "获取任务异常"}
@@ -44,6 +46,8 @@ func init() {
 	register(LotteryNotExists)
 	register(LotteryTicketNotEnough)
 	register(UseLotteryTicketErr)
+	register(ListRankErr)
+	register(RankNotExists)
 	register(GetTaskErr)
 }
 
