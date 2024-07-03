@@ -9,6 +9,7 @@ import (
 
 func SendGift(req event.SendGiftReq) (*event.SendGiftResp, error) {
 	kafkaMsg := kafka.SendGiftMsg{
+		Uuid:       req.Uuid,
 		FromUid:    req.FromUid,
 		ToUid:      req.ToUid,
 		GiftId:     req.GiftId,
@@ -22,6 +23,7 @@ func SendGift(req event.SendGiftReq) (*event.SendGiftResp, error) {
 
 func SendMessage(req event.SendMessageReq) (*event.SendMessageResp, error) {
 	kafkaMsg := kafka.SendMessageMsg{
+		Uuid:           req.Uuid,
 		FromUid:        req.FromUid,
 		ToUid:          req.ToUid,
 		MessageId:      req.MessageId,

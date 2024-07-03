@@ -2,9 +2,11 @@ package kafka
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/IBM/sarama"
 	"lee-activity-framework/lee-activity-api/mq/kafka"
+	"lee-activity-framework/lee-activity-task/service"
 	"log"
 	"os"
 	"os/signal"
@@ -66,8 +68,29 @@ func (handler *KafkaConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroup
 	for message := range claim.Messages() {
 		fmt.Printf("消息: 主题=%s 分区=%d 偏移量=%d\n", message.Topic, message.Partition, message.Offset)
 		fmt.Printf("消息内容: %s\n", string(message.Value))
+
+		switch message.Topic {
+		case new(kafka.SendGiftMsg).Topic():
+			msg := new(kafka.SendGiftMsg)
+			// 解码
+			err := json.Unmarshal(message.Value, msg)
+			if err != nil {
+				fmt.Println("Unmarshal error", err)
+				continue
+			}
+			service.ConsumeSendGiftMsgConsumer(msg)
+		case new(kafka.SendMessageMsg).Topic():
+			msg := new(kafka.SendMessageMsg)
+			// 解码
+			err := json.Unmarshal(message.Value, msg)
+			if err != nil {
+				fmt.Println("Unmarshal error", err)
+				continue
+			}
+			service.ConsumeSendMessageMsg(msg)
+		}
+
 		sess.MarkMessage(message, "")
-		// TODO：业务逻辑
 	}
 	return nil
 }

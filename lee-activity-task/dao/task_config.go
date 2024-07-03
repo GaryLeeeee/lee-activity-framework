@@ -14,3 +14,12 @@ func ListTaskByActivityId(activityId int) ([]*model.LeeActivityTaskConfig, error
 	}
 	return data, err
 }
+
+func GetTask(taskId int) (*model.LeeActivityTaskConfig, error) {
+	var data model.LeeActivityTaskConfig
+	err := _db.Table("lee_activity_task_config").Where("id = ?", taskId).First(&data).Error
+	if gorm.IsRecordNotFoundError(err) {
+		return nil, nil
+	}
+	return &data, nil
+}

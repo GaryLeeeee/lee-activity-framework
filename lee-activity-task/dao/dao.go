@@ -2,11 +2,13 @@ package dao
 
 import (
 	"fmt"
+	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var _db *gorm.DB
+var _rd *redis.Client
 
 func InitMySQL() {
 	// MySQL连接参数
@@ -23,4 +25,12 @@ func InitMySQL() {
 	if err != nil {
 		panic("连接MySQL失败，error=" + err.Error())
 	}
+}
+
+func InitRedis() {
+	client := redis.NewClient(&redis.Options{
+		Addr:     "127.0.0.1:6379",
+		Password: "",
+	})
+	_rd = client
 }

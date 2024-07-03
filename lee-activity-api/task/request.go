@@ -9,6 +9,7 @@ import (
 
 // 查询任务配置
 type TaskConfig struct {
+	Id         int    `json:"id"`          // 任务id
 	ActivityId int    `json:"activity_id"` // 活动id
 	Name       string `json:"name"`        // 任务名称
 	Type       int    `json:"type"`        // 任务类型

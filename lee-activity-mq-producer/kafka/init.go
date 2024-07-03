@@ -2,12 +2,13 @@ package kafka
 
 import (
 	"github.com/IBM/sarama"
+	"lee-activity-framework/lee-activity-api/logger"
 	"log"
 	"strings"
 	"time"
 )
 
-var _producer sarama.AsyncProducer
+var _producer sarama.SyncProducer
 
 func InitKafka() {
 	brokers := strings.Split("localhost:9092", ",")
@@ -25,11 +26,11 @@ func InitKafka() {
 	//}()
 }
 
-func createProducer(brokers []string) (sarama.AsyncProducer, error) {
+func createProducer(brokers []string) (sarama.SyncProducer, error) {
 	config := sarama.NewConfig()
 	config.Producer.Return.Successes = true
 	config.Producer.Timeout = 5 * time.Second
-	return sarama.NewAsyncProducer(brokers, config)
+	return sarama.NewSyncProducer(brokers, config)
 }
 
 func ProduceMessage(topic, value string) {
@@ -37,5 +38,8 @@ func ProduceMessage(topic, value string) {
 		Topic: topic,
 		Value: sarama.StringEncoder(value),
 	}
-	_producer.Input() <- message
+	_, _, err := _producer.SendMessage(message)
+	if err != nil {
+		logger.Errorf("ProduceMessage | SendMessage error:%v", err)
+	}
 }

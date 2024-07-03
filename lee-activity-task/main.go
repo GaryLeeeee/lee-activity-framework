@@ -11,6 +11,8 @@ func main() {
 	go kafka.InitKafka()
 	// MySQL
 	dao.InitMySQL()
+	// Redis
+	dao.InitRedis()
 	// Http
 	http.InitRouter()
 }
